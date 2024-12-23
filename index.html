@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sword of Lumina</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include the Paho MQTT library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/mqtt.min.js"></script>
+</head>
+<body>
+    <div class="video-container">
+        <!-- Video source remains the same -->
+        <video id="myVideo" class="video" loop muted>
+            <source src="swordvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay">
+            <div class="button"></div>
+        </div>
+        <div class="fancy-text">
+            Hold the blade with heart laid bare,<br>
+            Only the worthy will hear its prayer.
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
