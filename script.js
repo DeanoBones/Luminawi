@@ -8,20 +8,25 @@ const esp32Ip = "http://192.168.1.81";  // Replace with your ESP32's IP address
 
 // Event listeners for the button
 button.addEventListener("mouseover", () => {
-    video.play();
+	video.play();
     ESP = true;
-    console.log("ESP is now:", ESP); 
-
-    // Send a request to the ESP32 to trigger the buzzer
-    fetch(`${esp32Ip}/buzz`)
-        .then(response => response.text())
-        .then(data => {
-            console.log(data);  // Log the response from the ESP32 (e.g., "Buzzer Triggered")
-        })
-        .catch(error => {
-            console.error("Error triggering the buzzer:", error);
-        });
+    console.log("Button hovered, sending request to ESP32...");
+    
+    const xhr = new XMLHttpRequest();  // Create a new XMLHttpRequest object
+    xhr.open("GET", "http://192.168.1.81/buzz", true);  // Configure it for GET request to trigger the buzzer
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log("Buzzer triggered successfully!");  // Log success when response status is 200 (OK)
+        } else {
+            console.error("Failed to trigger buzzer:", xhr.status, xhr.statusText);  // Log error with status
+        }
+    };
+    xhr.onerror = function() {
+        console.error("Error triggering the buzzer:", xhr.status, xhr.statusText);  // Log any request error
+    };
+    xhr.send();  // Send the request
 });
+
 
 button.addEventListener("mouseleave", () => {
     video.pause();
